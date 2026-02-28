@@ -1,45 +1,66 @@
 #!/usr/bin/env python3
 #Python Version: python3 --version: Python 3.9.21
 """
-Code for executing an integral which yields the value of pi, using the mpi module for parallelism.
+Code for solving the Laplace and Poisson equations in 2D using different methods
 """
-import time             # Time module for benchmarking
-from mpi4py import MPI
+#ALL VALUES SHOULD BE TO 4 SIGNIFICANT FIGURES OF ACCURACY AT LEAST
+# Task 1 RELAXATION SOLVER: Code a relaxation method to solve Poisson's equation for NxN grid, grid spacing h and specific charges at grid sites.
+# This will be used to independently check our Monte Carlo results.
+#===============================================================================================#
 
-comm = MPI.COMM_WORLD   # Initiation of the communication between processors
-nproc = comm.Get_size() # Number of processes (4)
-rank = comm.Get_rank()  # Assign rank to processors (4 ranks: Rank 0,1,2,3)
-N = 100000000           # 100,000,000 Points
-DELTA = 1.0 / N         # Step Width of 1/100000000 from 0 to 1.
-INTEGRAL_PIECE = 0.0    # Initial value for rank's contribution
-N_SPLIT = N // nproc    # Splitting work among processors
+# Task 2 RANDOM WALK SOLVER: Code a random-walk solver to solve Poisson equation on the same grid, and obtain the Green's function value and its standard deviation
+#===============================================================================================#
 
-if rank < nproc - 1:        # Ensures the final rank gets the final split.
-    start = rank * N_SPLIT # Each processor gets N/NSplit
-    END = start + N_SPLIT  # For uneven splits of N
-else:
-    start = rank * N_SPLIT
-    END = N
 
-def integrand(x):
-    """
-    Function defining the integral of 4/(1+x^2)
-    """
-    return 4.0 * (1.0 - x * x)
+# Task 3: For a square grid of side length 1m, evaluate Green's function and it's error at
+# a) Centre of grid (50cm, 50cm)
+# b) Near corner (2cm, 2cm)
+# c) Middle of a face? (2cm, 50cm)
+# PLOT THE GREEN'S FUNCTION FOR ALL OF THESE AND ESTIMATE THE ERROR
+#===============================================================================================#
+import time
+import math
+import numpy as np
+from mpi4py import MPI  # Defining over-relaxation function which loops over grid coordinates (i,j)
 
-comm.Barrier()              # Synchronises ranks, required for accurate timing
-if rank == 0:
-    starttime = time.time() # START timing here
+comm = MPI.COMM_WORLD
+nproc = comm.Get_size()
+rank = comm.Get_rank()
 
-for i in range(start, END):
-    y = (i + 0.5) * DELTA
-    INTEGRAL_PIECE += integrand(y) * DELTA    # Function loops, final value sent to integral piece
+#====================================================#
+# Defining Grid
+#====================================================#
+N = 100
+L = 1          # 1 meter by 1 meter as per question 3                
+h = L / (N-1)  # Grid = N x N = 100 x 100 = 10,000 points
+               # Assuming the grid points touch the boundary, if N = 100, there are 99 gaps, then the spacing is the length of one side over number of gap.
+omega = 2 / 1 + np.sin(np.pi / N)
 
-TOTAL_INTEGRAL = comm.reduce(INTEGRAL_PIECE, op=MPI.SUM, root=0)
+# Defining charge functions f_ij
 
-if rank == 0:
-    endtime = time.time()                     # END timing here (after the reduce completes)
-    totaltime = endtime - starttime
-    print(f"Integral {TOTAL_INTEGRAL:.10f}")
-    print(f"Computation time: {totaltime:.6f} seconds")
-    print(f"Number of processes involved: {nproc}")
+def charge_zero(i,j):
+    return 0
+
+def charge_uniform(i,j):
+    return 10
+
+#Calculated using gradient formula and plugged into y=mx+c
+# j = 0, C = 0
+# j = 1, C = N-1 [Since N begins at 0, not 1]
+# y2-y1/x2-x1 = 1-0 / (N-1)-0 = 1/(N-1)
+# y = mx+c or charge = mj + c where c = 0 since line crosses y axis
+# charge = j/N-1
+def charge_uniform_gradient(i,j):
+    return j / (N-1)
+
+# Distance formula from the centre.
+# (0.5, 0.5) and (ih, jh)
+def charge_exponential_decay(i,j):
+    return np.exp(-10 * np.sqrt((i*h - 0.5)**2 + (j*h -0.5)**2))
+    
+    
+    
+
+
+for i in range(i,j):
+    phi_dash[i,j] = omega * (f[i,j] + 0.25*(phi_dash[i+1,j] + phi_dash[i-1,j] + phi_dash[i,j+1] + phi_dash[i,j-1])) + (1-omega) * phi[i,j]
