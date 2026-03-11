@@ -103,10 +103,10 @@ def RelaxationSolver(chargeFunction, top, bottom, left, right):
     
     #Potential boundaries
     phi = np.zeros([N,N])
-    phiTop = phi[N-1, :]
-    phiBottom = phi[0, :]
-    phiLeft = phi[:, 0]
-    phiRight = phi[:, N-1]
+    phiTop = phi[N-1, :] = top #Forgot to actually define these empty arrays
+    phiBottom = phi[0, :] = bottom
+    phiLeft = phi[:, 0] = left
+    phiRight = phi[:, N-1] = right
     
     #Charge
     f = np.zeros([N,N])
@@ -144,6 +144,7 @@ def random_walker(initial_i, initial_j): #initial starting positions (i,j)
     """
 
     initial_i, initial_j = i, j
+    
     
     while True:
         #Check if boundary has been hit
@@ -222,16 +223,27 @@ BC_C = (200, 0, 200, -400)
 
 charge_types = [charge_zero, charge_uniform, charge_uniform_gradient, charge_exponential_decay]
 
-comm.Barrier()
+comm.Barrier() #Synchronising Ranks
 if rank == 0:
-    starttime = time.time()
+    starttime = time.time() #Starting timer 
     
-for (start_i, start_j) in points:
+for (start_i, start_j) in points: 
     landing_probability, std_dev = greensfunction(start_i, start_j)
     
     if rank == 0:
         for (top, bottom, left, right) in BC_A, BC_B, BC_C:
+            #Unpacking boundary condition tuples into values of voltages for each edge
             for chargeFunction in charge_types:
+                GTop = landing_probability[N-1, :]
+                GBottom = landing_probability[0, :]
+                GLeft = landing_probability[:, 0]
+                GRight = landing_probability[:, N-1]
+                
+                potential = np.sum((GTop * top ) + (GBottom * bottom) + (GLeft * left) + (GRight * right))
+                print(f"Potential: {potential:.4f} V") #Printing Voltage to 4 sig figs
+                
+                relaxation = RelaxationSolver(chargeFunction, top, bottom, left, right)
+                print(f"relaxation: {relaxation[start_i, start_j]:.4f} V") #Printing Relaxation to 4 sig figs
                 
 #Greens Function for calculating potential i_j
 #G(i, j, xb, yb) * phi(xb, yb) is the probability of a walker
