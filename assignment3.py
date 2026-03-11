@@ -34,6 +34,7 @@ import random
 import time
 import math
 import numpy as np
+import matplotlib.pyplot as plt
 from mpi4py import MPI  # Defining over-relaxation function which loops over grid coordinates (i,j)
 
 comm = MPI.COMM_WORLD
@@ -143,7 +144,7 @@ def random_walker(initial_i, initial_j): #initial starting positions (i,j)
     Returns the boundary point it landed on.
     """
 
-    initial_i, initial_j = i, j
+    i, j = initial_i, initial_j
     
     
     while True:
@@ -187,12 +188,12 @@ def greensFunction(start_i, start_j):
     """
     COUNT_PIECE = np.zeros((N,N)) # Empty array for ranks to place their boundary counts inside.
         
-    for walker in range(start, END):
+    for walker in range(start, end):
         boundary_i, boundary_j = random_walker(start_i, start_j)
-        COUNTS_PIECE[boundary_i, boundary_j] += 1 # Add one count to count piece
-    COUNTS_GLOBAL = np.zeros((N,N))    
-    #Comm.Reduce(sendbuf, recvbuf, op=operation, root=0)
-    comm.Reduce(COUNTS_PIECE, COUNTS_GLOBAL, mpi.SUM, root=0)     # Summing all rank count pieces
+        COUNT_PIECE[boundary_i, boundary_j] += 1 # Add one count to count piece
+        COUNT_GLOBAL = np.zeros((N,N))    
+        #Comm.Reduce(sendbuf, recvbuf, op=operation, root=0)
+        comm.Reduce(COUNT_PIECE, COUNT_GLOBAL, MPI.SUM, root=0)     # Summing all rank count pieces
 
         
         # Example STD DEV Calculation
@@ -204,7 +205,7 @@ def greensFunction(start_i, start_j):
         # So probability of 0.9 has an uncertainty of +- 0.0095
         # STD DEV = sqrt(p(1-p) / N_WALKERS)
         
-        landing_probability = COUNTS_GLOBAL / N_WALKERS #Probabilities
+        landing_probability = COUNT_GLOBAL / N_WALKERS #Probabilities
         std_dev = np.sqrt(landing_probability*(1-landing_probability) / N_WALKERS)
         return landing_probability, std_dev
     
@@ -228,7 +229,7 @@ if rank == 0:
     starttime = time.time() #Starting timer 
     
 for (start_i, start_j) in points: 
-    landing_probability, std_dev = greensfunction(start_i, start_j)
+    landing_probability, std_dev = greensFunction(start_i, start_j)
     
     if rank == 0:
         for (top, bottom, left, right) in BC_A, BC_B, BC_C:
@@ -265,3 +266,6 @@ for (start_i, start_j) in points:
 # multiplied by the boundary potentials of all the edges.
 
 # Second term is the charge contribution
+
+# Using matplotlib to plot the NXN grid greens function for our test points
+
