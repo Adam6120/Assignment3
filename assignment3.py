@@ -40,7 +40,7 @@ from mpi4py import MPI  # Defining over-relaxation function which loops over gri
 comm = MPI.COMM_WORLD
 nproc = comm.Get_size()
 rank = comm.Get_rank()
-N_WALKERS = 1000   # Number of Walkers
+N_WALKERS = 1000000   # Number of Walkers
 N_SPLIT = N_WALKERS // nproc   # Splitting work among processors
 results = [] #Empty array to catch the outputs before they go into the table
 
@@ -226,16 +226,21 @@ BC_C = (200, 0, 200, -400)
 
 charge_types = [charge_zero, charge_uniform, charge_uniform_gradient, charge_exponential_decay]
 
-comm.Barrier() #Synchronising Ranks For Accurate Timing
-if rank == 0:
-    starttime = time.time() #Starting timer once all ranks are ready
     
-for (start_i, start_j) in points: 
+for (start_i, start_j) in points:
+    comm.Barrier() #Synchronising Ranks For Accurate Timing
+    if rank == 0:
+        starttime = time.time() #Starting timer once all ranks are ready 
+
     landing_probability, std_dev = greensFunction(start_i, start_j)
 
 
-    
+    comm.Barrier()
     if rank == 0:
+        endtime = time.time()
+        print(f"Timing: {endtime - starttime:.4f} seconds")
+
+
         for (top, bottom, left, right) in BC_A, BC_B, BC_C:
             #Unpacking boundary condition tuples into values of voltages for each edge
             for chargeFunction in charge_types:
@@ -244,12 +249,10 @@ for (start_i, start_j) in points:
                 relaxation = RelaxationSolver(chargeFunction, top, bottom, left, right)
                 results.append((start_i, start_j, top, bottom, left, right, chargeFunction.__name__, potential, relaxation[start_i, start_j]))
 if rank == 0:
-    endtime = time.time()
     print(f"{'Point':<12} {'BC':<20} {'Charge':<30} {'Greens (V)':<15} {'Relaxation (V)':<15}")
     print("-" * 92)
     for (start_i, start_j, top, bottom, left, right, charge_name, potential, relax_potential) in results:
         print(f"({start_i},{start_j}){'': <8} ({top},{bottom},{left},{right}){'': <4} {charge_name:<30} {potential:<15.4f} {relax_potential:<15.4f}") #Table formatting
-    print(f"Timing: {endtime - starttime:.4f} seconds")
                 
 #Greens Function for calculating potential i_j
 #G(i, j, xb, yb) * phi(xb, yb) is the probability of a walker
@@ -274,6 +277,4 @@ if rank == 0:
 
 # Using matplotlib to plot the NXN grid greens function for our test points
 
-if rank == 0:
-    print(f"Sum of all landing probabilities: {np.sum(landing_probability):.4f}")
 
