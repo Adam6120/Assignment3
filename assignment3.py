@@ -40,8 +40,9 @@ from mpi4py import MPI  # Defining over-relaxation function which loops over gri
 comm = MPI.COMM_WORLD
 nproc = comm.Get_size()
 rank = comm.Get_rank()
-N_WALKERS = 1000000    # Number of Walkers
+N_WALKERS = 1000   # Number of Walkers
 N_SPLIT = N_WALKERS // nproc   # Splitting work among processors
+results = [] #Empty array to catch the outputs before they go into the table
 
 #====================================================#
 # Defining Grid
@@ -191,9 +192,10 @@ def greensFunction(start_i, start_j):
     for walker in range(start, end):
         boundary_i, boundary_j = random_walker(start_i, start_j)
         COUNT_PIECE[boundary_i, boundary_j] += 1 # Add one count to count piece
-        COUNT_GLOBAL = np.zeros((N,N))    
-        #Comm.Reduce(sendbuf, recvbuf, op=operation, root=0)
-        comm.Reduce(COUNT_PIECE, COUNT_GLOBAL, MPI.SUM, root=0)     # Summing all rank count pieces
+
+    COUNT_GLOBAL = np.zeros((N,N))    
+    #Comm.Reduce(sendbuf, recvbuf, op=operation, root=0)
+    comm.Reduce(COUNT_PIECE, COUNT_GLOBAL, MPI.SUM, root=0)     # Summing all rank count pieces
 
         
         # Example STD DEV Calculation
@@ -205,9 +207,9 @@ def greensFunction(start_i, start_j):
         # So probability of 0.9 has an uncertainty of +- 0.0095
         # STD DEV = sqrt(p(1-p) / N_WALKERS)
         
-        landing_probability = COUNT_GLOBAL / N_WALKERS #Probabilities
-        std_dev = np.sqrt(landing_probability*(1-landing_probability) / N_WALKERS)
-        return landing_probability, std_dev
+    landing_probability = COUNT_GLOBAL / N_WALKERS #Probabilities
+    std_dev = np.sqrt(landing_probability*(1-landing_probability) / N_WALKERS)
+    return landing_probability, std_dev
     
 # Task 3 Evaluation ===============================
 # Converting coordinates into grid points (ih, jh), h = L/(N-1) = 1/99
@@ -224,27 +226,30 @@ BC_C = (200, 0, 200, -400)
 
 charge_types = [charge_zero, charge_uniform, charge_uniform_gradient, charge_exponential_decay]
 
-comm.Barrier() #Synchronising Ranks
+comm.Barrier() #Synchronising Ranks For Accurate Timing
 if rank == 0:
-    starttime = time.time() #Starting timer 
+    starttime = time.time() #Starting timer once all ranks are ready
     
 for (start_i, start_j) in points: 
     landing_probability, std_dev = greensFunction(start_i, start_j)
+
+
     
     if rank == 0:
         for (top, bottom, left, right) in BC_A, BC_B, BC_C:
             #Unpacking boundary condition tuples into values of voltages for each edge
             for chargeFunction in charge_types:
-                GTop = landing_probability[N-1, :]
-                GBottom = landing_probability[0, :]
-                GLeft = landing_probability[:, 0]
-                GRight = landing_probability[:, N-1]
-                
-                potential = np.sum((GTop * top ) + (GBottom * bottom) + (GLeft * left) + (GRight * right))
-                print(f"Potential: {potential:.4f} V") #Printing Voltage to 4 sig figs
-                
+                potential = np.sum(landing_probability[N-1, :] * top + landing_probability[0, :] * bottom + landing_probability[:, 0] * left + landing_probability[:, N-1] * right)
+
                 relaxation = RelaxationSolver(chargeFunction, top, bottom, left, right)
-                print(f"relaxation: {relaxation[start_i, start_j]:.4f} V") #Printing Relaxation to 4 sig figs
+                results.append((start_i, start_j, top, bottom, left, right, chargeFunction.__name__, potential, relaxation[start_i, start_j]))
+if rank == 0:
+    endtime = time.time()
+    print(f"{'Point':<12} {'BC':<20} {'Charge':<30} {'Greens (V)':<15} {'Relaxation (V)':<15}")
+    print("-" * 92)
+    for (start_i, start_j, top, bottom, left, right, charge_name, potential, relax_potential) in results:
+        print(f"({start_i},{start_j}){'': <8} ({top},{bottom},{left},{right}){'': <4} {charge_name:<30} {potential:<15.4f} {relax_potential:<15.4f}") #Table formatting
+    print(f"Timing: {endtime - starttime:.4f} seconds")
                 
 #Greens Function for calculating potential i_j
 #G(i, j, xb, yb) * phi(xb, yb) is the probability of a walker
@@ -268,4 +273,7 @@ for (start_i, start_j) in points:
 # Second term is the charge contribution
 
 # Using matplotlib to plot the NXN grid greens function for our test points
+
+if rank == 0:
+    print(f"Sum of all landing probabilities: {np.sum(landing_probability):.4f}")
 
