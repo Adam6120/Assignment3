@@ -1,0 +1,331 @@
+Loading mpi version 2021.6.0
+===================================================================================
+SLURM Job ID:            7247085
+Submit time:             Wed Mar 18 18:40:32 GMT 2026 (Unix Epoch time: 1773859232)
+Start time:              Wed Mar 18 18:40:33 GMT 2026 (Unix Epoch time: 1773859233)
+No. nodes:               1
+No. tasks:               40
+Job name:                Assignment3
+Account:                 teaching
+QoS:                     teaching
+Partition (queue):       teaching
+Submit directory:        /users/gmb22123/PH510/Assignment3
+Script name:             /users/gmb22123/PH510/Assignment3/assignment3jobscript.sh
+Master node:             wee08
+Nodes used:              wee08
+Task distribution:       
+===================================================================================
+
+Number of processors: 1
+Timing: 3383.2329 seconds
+Number of processors: 1
+Timing: 44.0358 seconds
+Number of processors: 1
+Timing: 302.3052 seconds
+Point        BC                   Charge                         Greens (V)      Relaxation (V) 
+--------------------------------------------------------------------------------------------
+(50,50)         (100,100,100,100)     charge_zero                    100.0000        99.9995        
+(50,50)         (100,100,100,100)     charge_uniform                 102.9447        102.9456       
+(50,50)         (100,100,100,100)     charge_uniform_gradient        100.1479        100.1475       
+(50,50)         (100,100,100,100)     charge_exponential_decay       100.0507        100.0502       
+(50,50)         (100,100,-100,-100)     charge_zero                    0.0870          -0.0000        
+(50,50)         (100,100,-100,-100)     charge_uniform                 3.0317          2.9461         
+(50,50)         (100,100,-100,-100)     charge_uniform_gradient        0.2349          0.1481         
+(50,50)         (100,100,-100,-100)     charge_exponential_decay       0.1377          0.0507         
+(50,50)         (200,0,200,-400)     charge_zero                    -1.4320         -1.6858        
+(50,50)         (200,0,200,-400)     charge_uniform                 1.5127          1.2603         
+(50,50)         (200,0,200,-400)     charge_uniform_gradient        -1.2841         -1.5377        
+(50,50)         (200,0,200,-400)     charge_exponential_decay       -1.3813         -1.6351        
+(2,2)         (100,100,100,100)     charge_zero                    100.0000        100.0000       
+(2,2)         (100,100,100,100)     charge_uniform                 100.0384        100.0378       
+(2,2)         (100,100,100,100)     charge_uniform_gradient        100.0006        100.0006       
+(2,2)         (100,100,100,100)     charge_exponential_decay       100.0001        100.0001       
+(2,2)         (100,100,-100,-100)     charge_zero                    0.0984          0.0000         
+(2,2)         (100,100,-100,-100)     charge_uniform                 0.1368          0.0379         
+(2,2)         (100,100,-100,-100)     charge_uniform_gradient        0.0990          0.0006         
+(2,2)         (100,100,-100,-100)     charge_exponential_decay       0.0985          0.0001         
+(2,2)         (200,0,200,-400)     charge_zero                    99.7138         99.8214        
+(2,2)         (200,0,200,-400)     charge_uniform                 99.7522         99.8592        
+(2,2)         (200,0,200,-400)     charge_uniform_gradient        99.7144         99.8220        
+(2,2)         (200,0,200,-400)     charge_exponential_decay       99.7139         99.8215        
+(2,50)         (100,100,100,100)     charge_zero                    100.0000        99.9999        
+(2,50)         (100,100,100,100)     charge_uniform                 100.2641        100.2646       
+(2,50)         (100,100,100,100)     charge_uniform_gradient        100.0133        100.0132       
+(2,50)         (100,100,100,100)     charge_exponential_decay       100.0020        100.0019       
+(2,50)         (100,100,-100,-100)     charge_zero                    93.2688         93.2594        
+(2,50)         (100,100,-100,-100)     charge_uniform                 93.5329         93.5241        
+(2,50)         (100,100,-100,-100)     charge_uniform_gradient        93.2821         93.2727        
+(2,50)         (100,100,-100,-100)     charge_exponential_decay       93.2708         93.2614        
+(2,50)         (200,0,200,-400)     charge_zero                    -2.1518         -2.1618        
+(2,50)         (200,0,200,-400)     charge_uniform                 -1.8877         -1.8971        
+(2,50)         (200,0,200,-400)     charge_uniform_gradient        -2.1385         -2.1485        
+(2,50)         (200,0,200,-400)     charge_exponential_decay       -2.1498         -2.1598        
+Number of processors: 2
+Timing: 1697.5588 seconds
+Number of processors: 2
+Timing: 21.9489 seconds
+Number of processors: 2
+Timing: 152.1923 seconds
+Point        BC                   Charge                         Greens (V)      Relaxation (V) 
+--------------------------------------------------------------------------------------------
+(50,50)         (100,100,100,100)     charge_zero                    100.0000        99.9995        
+(50,50)         (100,100,100,100)     charge_uniform                 102.9468        102.9456       
+(50,50)         (100,100,100,100)     charge_uniform_gradient        100.1481        100.1475       
+(50,50)         (100,100,100,100)     charge_exponential_decay       100.0507        100.0502       
+(50,50)         (100,100,-100,-100)     charge_zero                    -0.0310         -0.0000        
+(50,50)         (100,100,-100,-100)     charge_uniform                 2.9158          2.9461         
+(50,50)         (100,100,-100,-100)     charge_uniform_gradient        0.1171          0.1481         
+(50,50)         (100,100,-100,-100)     charge_exponential_decay       0.0197          0.0507         
+(50,50)         (200,0,200,-400)     charge_zero                    -1.5128         -1.6858        
+(50,50)         (200,0,200,-400)     charge_uniform                 1.4340          1.2603         
+(50,50)         (200,0,200,-400)     charge_uniform_gradient        -1.3647         -1.5377        
+(50,50)         (200,0,200,-400)     charge_exponential_decay       -1.4621         -1.6351        
+(2,2)         (100,100,100,100)     charge_zero                    100.0000        100.0000       
+(2,2)         (100,100,100,100)     charge_uniform                 100.0380        100.0378       
+(2,2)         (100,100,100,100)     charge_uniform_gradient        100.0006        100.0006       
+(2,2)         (100,100,100,100)     charge_exponential_decay       100.0001        100.0001       
+(2,2)         (100,100,-100,-100)     charge_zero                    0.2152          0.0000         
+(2,2)         (100,100,-100,-100)     charge_uniform                 0.2532          0.0379         
+(2,2)         (100,100,-100,-100)     charge_uniform_gradient        0.2158          0.0006         
+(2,2)         (100,100,-100,-100)     charge_exponential_decay       0.2153          0.0001         
+(2,2)         (200,0,200,-400)     charge_zero                    99.5896         99.8214        
+(2,2)         (200,0,200,-400)     charge_uniform                 99.6276         99.8592        
+(2,2)         (200,0,200,-400)     charge_uniform_gradient        99.5902         99.8220        
+(2,2)         (200,0,200,-400)     charge_exponential_decay       99.5897         99.8215        
+(2,50)         (100,100,100,100)     charge_zero                    100.0000        99.9999        
+(2,50)         (100,100,100,100)     charge_uniform                 100.2652        100.2646       
+(2,50)         (100,100,100,100)     charge_uniform_gradient        100.0134        100.0132       
+(2,50)         (100,100,100,100)     charge_exponential_decay       100.0020        100.0019       
+(2,50)         (100,100,-100,-100)     charge_zero                    93.2590         93.2594        
+(2,50)         (100,100,-100,-100)     charge_uniform                 93.5242         93.5241        
+(2,50)         (100,100,-100,-100)     charge_uniform_gradient        93.2724         93.2727        
+(2,50)         (100,100,-100,-100)     charge_exponential_decay       93.2610         93.2614        
+(2,50)         (200,0,200,-400)     charge_zero                    -2.2052         -2.1618        
+(2,50)         (200,0,200,-400)     charge_uniform                 -1.9400         -1.8971        
+(2,50)         (200,0,200,-400)     charge_uniform_gradient        -2.1918         -2.1485        
+(2,50)         (200,0,200,-400)     charge_exponential_decay       -2.2032         -2.1598        
+Number of processors: 4
+Timing: 886.7421 seconds
+Number of processors: 4
+Timing: 11.5652 seconds
+Number of processors: 4
+Timing: 80.2243 seconds
+Point        BC                   Charge                         Greens (V)      Relaxation (V) 
+--------------------------------------------------------------------------------------------
+(50,50)         (100,100,100,100)     charge_zero                    100.0000        99.9995        
+(50,50)         (100,100,100,100)     charge_uniform                 102.9486        102.9456       
+(50,50)         (100,100,100,100)     charge_uniform_gradient        100.1481        100.1475       
+(50,50)         (100,100,100,100)     charge_exponential_decay       100.0507        100.0502       
+(50,50)         (100,100,-100,-100)     charge_zero                    -0.0510         -0.0000        
+(50,50)         (100,100,-100,-100)     charge_uniform                 2.8976          2.9461         
+(50,50)         (100,100,-100,-100)     charge_uniform_gradient        0.0971          0.1481         
+(50,50)         (100,100,-100,-100)     charge_exponential_decay       -0.0003         0.0507         
+(50,50)         (200,0,200,-400)     charge_zero                    -1.5036         -1.6858        
+(50,50)         (200,0,200,-400)     charge_uniform                 1.4450          1.2603         
+(50,50)         (200,0,200,-400)     charge_uniform_gradient        -1.3555         -1.5377        
+(50,50)         (200,0,200,-400)     charge_exponential_decay       -1.4529         -1.6351        
+(2,2)         (100,100,100,100)     charge_zero                    100.0000        100.0000       
+(2,2)         (100,100,100,100)     charge_uniform                 100.0381        100.0378       
+(2,2)         (100,100,100,100)     charge_uniform_gradient        100.0006        100.0006       
+(2,2)         (100,100,100,100)     charge_exponential_decay       100.0001        100.0001       
+(2,2)         (100,100,-100,-100)     charge_zero                    0.0258          0.0000         
+(2,2)         (100,100,-100,-100)     charge_uniform                 0.0639          0.0379         
+(2,2)         (100,100,-100,-100)     charge_uniform_gradient        0.0264          0.0006         
+(2,2)         (100,100,-100,-100)     charge_exponential_decay       0.0259          0.0001         
+(2,2)         (200,0,200,-400)     charge_zero                    99.7778         99.8214        
+(2,2)         (200,0,200,-400)     charge_uniform                 99.8159         99.8592        
+(2,2)         (200,0,200,-400)     charge_uniform_gradient        99.7784         99.8220        
+(2,2)         (200,0,200,-400)     charge_exponential_decay       99.7779         99.8215        
+(2,50)         (100,100,100,100)     charge_zero                    100.0000        99.9999        
+(2,50)         (100,100,100,100)     charge_uniform                 100.2658        100.2646       
+(2,50)         (100,100,100,100)     charge_uniform_gradient        100.0134        100.0132       
+(2,50)         (100,100,100,100)     charge_exponential_decay       100.0020        100.0019       
+(2,50)         (100,100,-100,-100)     charge_zero                    93.2568         93.2594        
+(2,50)         (100,100,-100,-100)     charge_uniform                 93.5226         93.5241        
+(2,50)         (100,100,-100,-100)     charge_uniform_gradient        93.2702         93.2727        
+(2,50)         (100,100,-100,-100)     charge_exponential_decay       93.2588         93.2614        
+(2,50)         (200,0,200,-400)     charge_zero                    -2.0652         -2.1618        
+(2,50)         (200,0,200,-400)     charge_uniform                 -1.7994         -1.8971        
+(2,50)         (200,0,200,-400)     charge_uniform_gradient        -2.0518         -2.1485        
+(2,50)         (200,0,200,-400)     charge_exponential_decay       -2.0632         -2.1598        
+Number of processors: 8
+Timing: 472.1832 seconds
+Number of processors: 8
+Timing: 6.1607 seconds
+Number of processors: 8
+Timing: 41.9519 seconds
+Point        BC                   Charge                         Greens (V)      Relaxation (V) 
+--------------------------------------------------------------------------------------------
+(50,50)         (100,100,100,100)     charge_zero                    100.0000        99.9995        
+(50,50)         (100,100,100,100)     charge_uniform                 102.9439        102.9456       
+(50,50)         (100,100,100,100)     charge_uniform_gradient        100.1479        100.1475       
+(50,50)         (100,100,100,100)     charge_exponential_decay       100.0507        100.0502       
+(50,50)         (100,100,-100,-100)     charge_zero                    0.0396          -0.0000        
+(50,50)         (100,100,-100,-100)     charge_uniform                 2.9835          2.9461         
+(50,50)         (100,100,-100,-100)     charge_uniform_gradient        0.1875          0.1481         
+(50,50)         (100,100,-100,-100)     charge_exponential_decay       0.0903          0.0507         
+(50,50)         (200,0,200,-400)     charge_zero                    -1.5640         -1.6858        
+(50,50)         (200,0,200,-400)     charge_uniform                 1.3799          1.2603         
+(50,50)         (200,0,200,-400)     charge_uniform_gradient        -1.4161         -1.5377        
+(50,50)         (200,0,200,-400)     charge_exponential_decay       -1.5133         -1.6351        
+(2,2)         (100,100,100,100)     charge_zero                    100.0000        100.0000       
+(2,2)         (100,100,100,100)     charge_uniform                 100.0378        100.0378       
+(2,2)         (100,100,100,100)     charge_uniform_gradient        100.0006        100.0006       
+(2,2)         (100,100,100,100)     charge_exponential_decay       100.0001        100.0001       
+(2,2)         (100,100,-100,-100)     charge_zero                    -0.2004         0.0000         
+(2,2)         (100,100,-100,-100)     charge_uniform                 -0.1626         0.0379         
+(2,2)         (100,100,-100,-100)     charge_uniform_gradient        -0.1998         0.0006         
+(2,2)         (100,100,-100,-100)     charge_exponential_decay       -0.2003         0.0001         
+(2,2)         (200,0,200,-400)     charge_zero                    100.0364        99.8214        
+(2,2)         (200,0,200,-400)     charge_uniform                 100.0742        99.8592        
+(2,2)         (200,0,200,-400)     charge_uniform_gradient        100.0370        99.8220        
+(2,2)         (200,0,200,-400)     charge_exponential_decay       100.0365        99.8215        
+(2,50)         (100,100,100,100)     charge_zero                    100.0000        99.9999        
+(2,50)         (100,100,100,100)     charge_uniform                 100.2662        100.2646       
+(2,50)         (100,100,100,100)     charge_uniform_gradient        100.0134        100.0132       
+(2,50)         (100,100,100,100)     charge_exponential_decay       100.0020        100.0019       
+(2,50)         (100,100,-100,-100)     charge_zero                    93.1734         93.2594        
+(2,50)         (100,100,-100,-100)     charge_uniform                 93.4396         93.5241        
+(2,50)         (100,100,-100,-100)     charge_uniform_gradient        93.1868         93.2727        
+(2,50)         (100,100,-100,-100)     charge_exponential_decay       93.1754         93.2614        
+(2,50)         (200,0,200,-400)     charge_zero                    -2.2626         -2.1618        
+(2,50)         (200,0,200,-400)     charge_uniform                 -1.9964         -1.8971        
+(2,50)         (200,0,200,-400)     charge_uniform_gradient        -2.2492         -2.1485        
+(2,50)         (200,0,200,-400)     charge_exponential_decay       -2.2606         -2.1598        
+Number of processors: 16
+Timing: 248.0981 seconds
+Number of processors: 16
+Timing: 3.1705 seconds
+Number of processors: 16
+Timing: 21.9090 seconds
+Point        BC                   Charge                         Greens (V)      Relaxation (V) 
+--------------------------------------------------------------------------------------------
+(50,50)         (100,100,100,100)     charge_zero                    100.0000        99.9995        
+(50,50)         (100,100,100,100)     charge_uniform                 102.9471        102.9456       
+(50,50)         (100,100,100,100)     charge_uniform_gradient        100.1481        100.1475       
+(50,50)         (100,100,100,100)     charge_exponential_decay       100.0507        100.0502       
+(50,50)         (100,100,-100,-100)     charge_zero                    0.0976          -0.0000        
+(50,50)         (100,100,-100,-100)     charge_uniform                 3.0447          2.9461         
+(50,50)         (100,100,-100,-100)     charge_uniform_gradient        0.2457          0.1481         
+(50,50)         (100,100,-100,-100)     charge_exponential_decay       0.1483          0.0507         
+(50,50)         (200,0,200,-400)     charge_zero                    -1.7258         -1.6858        
+(50,50)         (200,0,200,-400)     charge_uniform                 1.2213          1.2603         
+(50,50)         (200,0,200,-400)     charge_uniform_gradient        -1.5777         -1.5377        
+(50,50)         (200,0,200,-400)     charge_exponential_decay       -1.6751         -1.6351        
+(2,2)         (100,100,100,100)     charge_zero                    100.0000        100.0000       
+(2,2)         (100,100,100,100)     charge_uniform                 100.0380        100.0378       
+(2,2)         (100,100,100,100)     charge_uniform_gradient        100.0006        100.0006       
+(2,2)         (100,100,100,100)     charge_exponential_decay       100.0001        100.0001       
+(2,2)         (100,100,-100,-100)     charge_zero                    -0.0868         0.0000         
+(2,2)         (100,100,-100,-100)     charge_uniform                 -0.0488         0.0379         
+(2,2)         (100,100,-100,-100)     charge_uniform_gradient        -0.0862         0.0006         
+(2,2)         (100,100,-100,-100)     charge_exponential_decay       -0.0867         0.0001         
+(2,2)         (200,0,200,-400)     charge_zero                    99.9004         99.8214        
+(2,2)         (200,0,200,-400)     charge_uniform                 99.9384         99.8592        
+(2,2)         (200,0,200,-400)     charge_uniform_gradient        99.9010         99.8220        
+(2,2)         (200,0,200,-400)     charge_exponential_decay       99.9005         99.8215        
+(2,50)         (100,100,100,100)     charge_zero                    100.0000        99.9999        
+(2,50)         (100,100,100,100)     charge_uniform                 100.2646        100.2646       
+(2,50)         (100,100,100,100)     charge_uniform_gradient        100.0133        100.0132       
+(2,50)         (100,100,100,100)     charge_exponential_decay       100.0020        100.0019       
+(2,50)         (100,100,-100,-100)     charge_zero                    93.2524         93.2594        
+(2,50)         (100,100,-100,-100)     charge_uniform                 93.5170         93.5241        
+(2,50)         (100,100,-100,-100)     charge_uniform_gradient        93.2657         93.2727        
+(2,50)         (100,100,-100,-100)     charge_exponential_decay       93.2544         93.2614        
+(2,50)         (200,0,200,-400)     charge_zero                    -2.1900         -2.1618        
+(2,50)         (200,0,200,-400)     charge_uniform                 -1.9254         -1.8971        
+(2,50)         (200,0,200,-400)     charge_uniform_gradient        -2.1767         -2.1485        
+(2,50)         (200,0,200,-400)     charge_exponential_decay       -2.1880         -2.1598        
+Number of processors: 32
+Timing: 150.5172 seconds
+Number of processors: 32
+Timing: 1.9489 seconds
+Number of processors: 32
+Timing: 13.4797 seconds
+Point        BC                   Charge                         Greens (V)      Relaxation (V) 
+--------------------------------------------------------------------------------------------
+(50,50)         (100,100,100,100)     charge_zero                    100.0000        99.9995        
+(50,50)         (100,100,100,100)     charge_uniform                 102.9468        102.9456       
+(50,50)         (100,100,100,100)     charge_uniform_gradient        100.1480        100.1475       
+(50,50)         (100,100,100,100)     charge_exponential_decay       100.0507        100.0502       
+(50,50)         (100,100,-100,-100)     charge_zero                    0.0990          -0.0000        
+(50,50)         (100,100,-100,-100)     charge_uniform                 3.0458          2.9461         
+(50,50)         (100,100,-100,-100)     charge_uniform_gradient        0.2470          0.1481         
+(50,50)         (100,100,-100,-100)     charge_exponential_decay       0.1497          0.0507         
+(50,50)         (200,0,200,-400)     charge_zero                    -1.5198         -1.6858        
+(50,50)         (200,0,200,-400)     charge_uniform                 1.4270          1.2603         
+(50,50)         (200,0,200,-400)     charge_uniform_gradient        -1.3718         -1.5377        
+(50,50)         (200,0,200,-400)     charge_exponential_decay       -1.4691         -1.6351        
+(2,2)         (100,100,100,100)     charge_zero                    100.0000        100.0000       
+(2,2)         (100,100,100,100)     charge_uniform                 100.0378        100.0378       
+(2,2)         (100,100,100,100)     charge_uniform_gradient        100.0006        100.0006       
+(2,2)         (100,100,100,100)     charge_exponential_decay       100.0001        100.0001       
+(2,2)         (100,100,-100,-100)     charge_zero                    -0.1330         0.0000         
+(2,2)         (100,100,-100,-100)     charge_uniform                 -0.0952         0.0379         
+(2,2)         (100,100,-100,-100)     charge_uniform_gradient        -0.1324         0.0006         
+(2,2)         (100,100,-100,-100)     charge_exponential_decay       -0.1329         0.0001         
+(2,2)         (200,0,200,-400)     charge_zero                    99.9912         99.8214        
+(2,2)         (200,0,200,-400)     charge_uniform                 100.0290        99.8592        
+(2,2)         (200,0,200,-400)     charge_uniform_gradient        99.9918         99.8220        
+(2,2)         (200,0,200,-400)     charge_exponential_decay       99.9913         99.8215        
+(2,50)         (100,100,100,100)     charge_zero                    100.0000        99.9999        
+(2,50)         (100,100,100,100)     charge_uniform                 100.2660        100.2646       
+(2,50)         (100,100,100,100)     charge_uniform_gradient        100.0134        100.0132       
+(2,50)         (100,100,100,100)     charge_exponential_decay       100.0020        100.0019       
+(2,50)         (100,100,-100,-100)     charge_zero                    93.2374         93.2594        
+(2,50)         (100,100,-100,-100)     charge_uniform                 93.5034         93.5241        
+(2,50)         (100,100,-100,-100)     charge_uniform_gradient        93.2508         93.2727        
+(2,50)         (100,100,-100,-100)     charge_exponential_decay       93.2394         93.2614        
+(2,50)         (200,0,200,-400)     charge_zero                    -2.2608         -2.1618        
+(2,50)         (200,0,200,-400)     charge_uniform                 -1.9948         -1.8971        
+(2,50)         (200,0,200,-400)     charge_uniform_gradient        -2.2474         -2.1485        
+(2,50)         (200,0,200,-400)     charge_exponential_decay       -2.2588         -2.1598        
+Number of processors: 40
+Timing: 127.7900 seconds
+Number of processors: 40
+Timing: 1.6778 seconds
+Number of processors: 40
+Timing: 11.6517 seconds
+Point        BC                   Charge                         Greens (V)      Relaxation (V) 
+--------------------------------------------------------------------------------------------
+(50,50)         (100,100,100,100)     charge_zero                    100.0000        99.9995        
+(50,50)         (100,100,100,100)     charge_uniform                 102.9441        102.9456       
+(50,50)         (100,100,100,100)     charge_uniform_gradient        100.1480        100.1475       
+(50,50)         (100,100,100,100)     charge_exponential_decay       100.0507        100.0502       
+(50,50)         (100,100,-100,-100)     charge_zero                    0.0342          -0.0000        
+(50,50)         (100,100,-100,-100)     charge_uniform                 2.9783          2.9461         
+(50,50)         (100,100,-100,-100)     charge_uniform_gradient        0.1822          0.1481         
+(50,50)         (100,100,-100,-100)     charge_exponential_decay       0.0849          0.0507         
+(50,50)         (200,0,200,-400)     charge_zero                    -1.9656         -1.6858        
+(50,50)         (200,0,200,-400)     charge_uniform                 0.9785          1.2603         
+(50,50)         (200,0,200,-400)     charge_uniform_gradient        -1.8176         -1.5377        
+(50,50)         (200,0,200,-400)     charge_exponential_decay       -1.9149         -1.6351        
+(2,2)         (100,100,100,100)     charge_zero                    100.0000        100.0000       
+(2,2)         (100,100,100,100)     charge_uniform                 100.0376        100.0378       
+(2,2)         (100,100,100,100)     charge_uniform_gradient        100.0006        100.0006       
+(2,2)         (100,100,100,100)     charge_exponential_decay       100.0001        100.0001       
+(2,2)         (100,100,-100,-100)     charge_zero                    -0.1050         0.0000         
+(2,2)         (100,100,-100,-100)     charge_uniform                 -0.0674         0.0379         
+(2,2)         (100,100,-100,-100)     charge_uniform_gradient        -0.1044         0.0006         
+(2,2)         (100,100,-100,-100)     charge_exponential_decay       -0.1049         0.0001         
+(2,2)         (200,0,200,-400)     charge_zero                    99.9096         99.8214        
+(2,2)         (200,0,200,-400)     charge_uniform                 99.9472         99.8592        
+(2,2)         (200,0,200,-400)     charge_uniform_gradient        99.9102         99.8220        
+(2,2)         (200,0,200,-400)     charge_exponential_decay       99.9097         99.8215        
+(2,50)         (100,100,100,100)     charge_zero                    100.0000        99.9999        
+(2,50)         (100,100,100,100)     charge_uniform                 100.2649        100.2646       
+(2,50)         (100,100,100,100)     charge_uniform_gradient        100.0133        100.0132       
+(2,50)         (100,100,100,100)     charge_exponential_decay       100.0020        100.0019       
+(2,50)         (100,100,-100,-100)     charge_zero                    93.2208         93.2594        
+(2,50)         (100,100,-100,-100)     charge_uniform                 93.4857         93.5241        
+(2,50)         (100,100,-100,-100)     charge_uniform_gradient        93.2341         93.2727        
+(2,50)         (100,100,-100,-100)     charge_exponential_decay       93.2228         93.2614        
+(2,50)         (200,0,200,-400)     charge_zero                    -2.2178         -2.1618        
+(2,50)         (200,0,200,-400)     charge_uniform                 -1.9529         -1.8971        
+(2,50)         (200,0,200,-400)     charge_uniform_gradient        -2.2045         -2.1485        
+(2,50)         (200,0,200,-400)     charge_exponential_decay       -2.2158         -2.1598        
+===================================================================================
+SLURM job 7247085 ended:     Wed Mar 18 21:09:20 GMT 2026 (Unix Epoch time: 1773868160)
+This is an estimated end time using the 'date' command from node wee08.hpc.strath.ac.uk
+For accurate timings, use 'sacct -j 7247085 -X --format=Submit,Start,End,Elapsed'
+======================================================================================

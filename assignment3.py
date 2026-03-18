@@ -48,7 +48,7 @@ results = [] #Empty array to catch the outputs before they go into the table
 # Defining Grid
 #====================================================#
 N = 100
-L = 1          # 1 meter by 1 meter as per question 3                
+L = 1          # 1 meter by 1 meter as per question 3               
 h = L / (N-1)  # Grid = N x N = 100 x 100 = 10,000 points
                # Assuming the grid points touch the boundary, if N = 100, there are 99 gaps, then the spacing is the length of one side over number of gap.
 omega = 2 / (1 + np.sin(np.pi / N))
@@ -146,13 +146,16 @@ def random_walker(initial_i, initial_j): #initial starting positions (i,j)
     """
 
     i, j = initial_i, initial_j
+    visits = [] # Records the path of walkers BEFORE hitting the boundary
+
     
     
     while True:
         #Check if boundary has been hit
         if i == 0 or i == N-1 or j == 0 or j == N-1:
-            return i, j
+            return i, j, visits
         
+        visits.append((i,j)) #This just adds the coordinates into the visits array
         #If we consider a random walker at the 2D point (i, j) and allow it to jump in one of four directions
         #with equal probability (i.e. 0.25) and we average the potential found by each walker.
         step = random.randint(0,3) #Assigning a random integer to one direction, which walker will travel
@@ -188,28 +191,34 @@ def greensFunction(start_i, start_j):
     using random walkers
     """
     COUNT_PIECE = np.zeros((N,N)) # Empty array for ranks to place their boundary counts inside.
-        
+    VISIT_PIECE = np.zeros((N,N)) # Empty array for ranks to place their paths inside   
+    
     for walker in range(start, end):
-        boundary_i, boundary_j = random_walker(start_i, start_j)
+        boundary_i, boundary_j, visits = random_walker(start_i, start_j)
         COUNT_PIECE[boundary_i, boundary_j] += 1 # Add one count to count piece
+        for (visit_i, visit_j) in visits:
+            VISIT_PIECE[visit_i, visit_j] += 1 #Add one visit to visit piece
+    
 
-    COUNT_GLOBAL = np.zeros((N,N))    
+    COUNT_GLOBAL = np.zeros((N,N)) # All ranks contribute to this
+    VISIT_GLOBAL = np.zeros((N,N)) # All ranks contribute to this   
     #Comm.Reduce(sendbuf, recvbuf, op=operation, root=0)
     comm.Reduce(COUNT_PIECE, COUNT_GLOBAL, MPI.SUM, root=0)     # Summing all rank count pieces
-
+    comm.Reduce(VISIT_PIECE, VISIT_GLOBAL, MPI.SUM, root=0)     # Summing all rank visit pieces
         
-        # Example STD DEV Calculation
-        # For one boundary point (i,j), walkers landed there? yes = 900, no = 100
-        # p = 900/1000 = 0.9, Variance = p(1-p) = 0.9(0.1) = 0.09
-        # Variance of 1000 summed trials = 1000 * 0.09 = 90
-        # Interested in the variance of the average probability of landing at (i,j)
-        # 90/1000^2 = 0.00009, STD DEV = sqrt(0.00009) = 0.0095
-        # So probability of 0.9 has an uncertainty of +- 0.0095
-        # STD DEV = sqrt(p(1-p) / N_WALKERS)
+    # Example STD DEV Calculation
+    # For one boundary point (i,j), walkers landed there? yes = 900, no = 100
+    # p = 900/1000 = 0.9, Variance = p(1-p) = 0.9(0.1) = 0.09
+    # Variance of 1000 summed trials = 1000 * 0.09 = 90
+    # Interested in the variance of the average probability of landing at (i,j)
+    # 90/1000^2 = 0.00009, STD DEV = sqrt(0.00009) = 0.0095
+    # So probability of 0.9 has an uncertainty of +- 0.0095
+    # STD DEV = sqrt(p(1-p) / N_WALKERS)
         
     landing_probability = COUNT_GLOBAL / N_WALKERS #Probabilities
     std_dev = np.sqrt(landing_probability*(1-landing_probability) / N_WALKERS)
-    return landing_probability, std_dev
+    charge_greens = (h**2 / N_WALKERS) * VISIT_GLOBAL
+    return landing_probability, std_dev, charge_greens
     
 # Task 3 Evaluation ===============================
 # Converting coordinates into grid points (ih, jh), h = L/(N-1) = 1/99
@@ -232,19 +241,37 @@ for (start_i, start_j) in points:
     if rank == 0:
         starttime = time.time() #Starting timer once all ranks are ready 
 
-    landing_probability, std_dev = greensFunction(start_i, start_j)
+    landing_probability, std_dev, charge_greens = greensFunction(start_i, start_j)
 
 
     comm.Barrier()
     if rank == 0:
         endtime = time.time()
+        print(f"Number of processors: {nproc}")
         print(f"Timing: {endtime - starttime:.4f} seconds")
+        
+        # Plotting random walker landing probability
+        plt.imshow(landing_probability, origin='lower', cmap='rainbow') # Colour only shows on the edges, expected the entire grid to be full
+        plt.title(f'Greens Function at ({start_i},{start_j})') # On analysis, only the walker's landing location is recorded
+        plt.colorbar()
+        plt.savefig(f'greens_{start_i}_{start_j}_{nproc}.png', dpi=300)
+        plt.close()
 
+        # Plotting random walker interior paths
+        plt.imshow(charge_greens, origin='lower', cmap='rainbow')
+        plt.title(f'Charge Greens Function at ({start_i},{start_j}), Walkers:{N_WALKERS}, Processors:{nproc}')
+        plt.colorbar()
+        plt.savefig(f'charge_greens_{start_i}_{start_j}_{nproc}.png', dpi=300) #Trying to get better resolution as plots seem blurry, seems dpi just increases the size
+        plt.close()
 
         for (top, bottom, left, right) in BC_A, BC_B, BC_C:
             #Unpacking boundary condition tuples into values of voltages for each edge
             for chargeFunction in charge_types:
-                potential = np.sum(landing_probability[N-1, :] * top + landing_probability[0, :] * bottom + landing_probability[:, 0] * left + landing_probability[:, N-1] * right)
+                f_grid = np.zeros((N,N)) #Filling this grid with charge values across grid
+                for i in range(1, N-1):
+                    for j in range(1, N-1):
+                        f_grid[i,j] = chargeFunction(i,j) #Issue before was I was calling a function without a respective array 
+                potential = np.sum(landing_probability[N-1, :] * top + landing_probability[0, :] * bottom + landing_probability[:, 0] * left + landing_probability[:, N-1] * right) + np.sum(charge_greens * f_grid)
 
                 relaxation = RelaxationSolver(chargeFunction, top, bottom, left, right)
                 results.append((start_i, start_j, top, bottom, left, right, chargeFunction.__name__, potential, relaxation[start_i, start_j]))
