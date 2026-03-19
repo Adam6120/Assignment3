@@ -1,0 +1,68 @@
+Loading mpi version 2021.6.0
+===================================================================================
+SLURM Job ID:            7247127
+Submit time:             Thu Mar 19 00:23:59 GMT 2026 (Unix Epoch time: 1773879839)
+Start time:              Thu Mar 19 00:24:04 GMT 2026 (Unix Epoch time: 1773879844)
+No. nodes:               1
+No. tasks:               16
+Job name:                Assignment3
+Account:                 teaching
+QoS:                     teaching
+Partition (queue):       teaching
+Submit directory:        /users/gmb22123/PH510/Assignment3
+Script name:             /users/gmb22123/PH510/Assignment3/assignment3jobscript.sh
+Master node:             wee16
+Nodes used:              wee16
+Task distribution:       
+===================================================================================
+
+Number of processors: 16
+Timing: 292.7190 seconds
+Number of processors: 16
+Timing: 3.8891 seconds
+Number of processors: 16
+Timing: 26.3525 seconds
+Point        BC                   Charge                         Greens (V)      Relaxation (V) 
+--------------------------------------------------------------------------------------------
+(50,50)         (100,100,100,100)     charge_zero                    100.0000        99.9995        
+(50,50)         (100,100,100,100)     charge_uniform                 102.9467        102.9456       
+(50,50)         (100,100,100,100)     charge_uniform_gradient        100.1481        100.1475       
+(50,50)         (100,100,100,100)     charge_exponential_decay       100.0507        100.0502       
+(50,50)         (100,100,-100,-100)     charge_zero                    -0.1190         -0.0000        
+(50,50)         (100,100,-100,-100)     charge_uniform                 2.8277          2.9461         
+(50,50)         (100,100,-100,-100)     charge_uniform_gradient        0.0291          0.1481         
+(50,50)         (100,100,-100,-100)     charge_exponential_decay       -0.0683         0.0507         
+(50,50)         (200,0,200,-400)     charge_zero                    -1.8800         -1.6858        
+(50,50)         (200,0,200,-400)     charge_uniform                 1.0667          1.2603         
+(50,50)         (200,0,200,-400)     charge_uniform_gradient        -1.7319         -1.5377        
+(50,50)         (200,0,200,-400)     charge_exponential_decay       -1.8293         -1.6351        
+(2,2)         (100,100,100,100)     charge_zero                    100.0000        100.0000       
+(2,2)         (100,100,100,100)     charge_uniform                 100.0379        100.0378       
+(2,2)         (100,100,100,100)     charge_uniform_gradient        100.0006        100.0006       
+(2,2)         (100,100,100,100)     charge_exponential_decay       100.0001        100.0001       
+(2,2)         (100,100,-100,-100)     charge_zero                    0.0170          0.0000         
+(2,2)         (100,100,-100,-100)     charge_uniform                 0.0549          0.0379         
+(2,2)         (100,100,-100,-100)     charge_uniform_gradient        0.0176          0.0006         
+(2,2)         (100,100,-100,-100)     charge_exponential_decay       0.0171          0.0001         
+(2,2)         (200,0,200,-400)     charge_zero                    99.8078         99.8214        
+(2,2)         (200,0,200,-400)     charge_uniform                 99.8457         99.8592        
+(2,2)         (200,0,200,-400)     charge_uniform_gradient        99.8084         99.8220        
+(2,2)         (200,0,200,-400)     charge_exponential_decay       99.8079         99.8215        
+(2,50)         (100,100,100,100)     charge_zero                    100.0000        99.9999        
+(2,50)         (100,100,100,100)     charge_uniform                 100.2641        100.2646       
+(2,50)         (100,100,100,100)     charge_uniform_gradient        100.0133        100.0132       
+(2,50)         (100,100,100,100)     charge_exponential_decay       100.0020        100.0019       
+(2,50)         (100,100,-100,-100)     charge_zero                    93.2682         93.2594        
+(2,50)         (100,100,-100,-100)     charge_uniform                 93.5323         93.5241        
+(2,50)         (100,100,-100,-100)     charge_uniform_gradient        93.2815         93.2727        
+(2,50)         (100,100,-100,-100)     charge_exponential_decay       93.2702         93.2614        
+(2,50)         (200,0,200,-400)     charge_zero                    -2.1510         -2.1618        
+(2,50)         (200,0,200,-400)     charge_uniform                 -1.8869         -1.8971        
+(2,50)         (200,0,200,-400)     charge_uniform_gradient        -2.1377         -2.1485        
+(2,50)         (200,0,200,-400)     charge_exponential_decay       -2.1490         -2.1598        
+Total wall clock time: 516.7093 seconds.
+===================================================================================
+SLURM job 7247127 ended:     Thu Mar 19 00:32:46 GMT 2026 (Unix Epoch time: 1773880366)
+This is an estimated end time using the 'date' command from node wee16.hpc.strath.ac.uk
+For accurate timings, use 'sacct -j 7247127 -X --format=Submit,Start,End,Elapsed'
+======================================================================================
