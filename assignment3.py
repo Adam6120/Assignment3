@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# ©(2026) ADAM HUSSAIN. ALL RIGHTS RESERVED
 #Python Version: python3 --version: Python 3.9.21
 """
 Code for solving the Laplace and Poisson equations in 2D using different methods
